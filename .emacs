@@ -62,6 +62,12 @@
           (previous-line 1)
           (move-to-column my-previous-column)))))
 
+(defun todoo-or-close-todo ()
+  "Call todoo buffer and close it if already in it"
+  (interactive)
+  (if (eq major-mode 'todoo-mode)
+      (call-interactively 'todoo-save-and-exit)
+    (call-interactively 'todoo)))
 
 ;;;\-----------------
 
@@ -69,6 +75,9 @@
 
 ;;;/-----------------
 ;;; Keybindings
+
+(define-key global-map [f12] ; call or close todoo buffer
+  'todoo-or-close-todo)
 
 (define-key global-map [f8]             ; kill current buffer
   (lambda () (interactive) (kill-buffer (current-buffer))))
@@ -312,4 +321,25 @@ that file in the other window and position point on that line."
  '(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :color "grey40")))))
  '(smerge-refined-change ((t (:background "yellow" :foreground "black"))))
  '(tooltip ((((class color)) (:background "lightyellow" :foreground "black"))))
- '(trailing-whitespace ((((class color) (background dark)) (:background "red1" :foreground "white")))))
+ '(trailing-whitespace ((((class color) (background dark)) (:background "red1" :foreground "white"))))
+ ;;;(custom-set-variables
+ '(delete-selection-mode t)
+ '(fill-column 90)
+ '(kill-whole-line t)
+ '(tab-always-indent t)
+ '(indent-tabs-mode nil)
+ '(transient-mark-mode t)
+ '(tab-width 2)
+ '(safe-local-variable-values (quote (
+                                      (c-file-offsets (substatement-open . 0))
+                                      (prompt-to-byte-compile)
+                                      (c-indentation-style . k&r)
+                                      (indent-tabs-mode . 1)
+                                      (folded-file . t))))
+ '(use-dialog-box nil)
+ '(whitespace-global-mode nil)
+ '(whitespace-modes (quote (awk-mode)))
+ '(whitespace-silent t)
+ '(show-paren-mode t)
+ '(next-line-add-newlines t))
+;;)
