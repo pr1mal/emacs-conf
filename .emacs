@@ -216,6 +216,8 @@ that file in the other window and position point on that line."
                ("C-source" (mode . c-mode))
                ("C++-source" (mode . c++-mode))
                ("Ruby-source" (mode . ruby-mode))
+               ("ERB-source" (or (name . ".*\\.erb")
+                                 (name . ".*\\.rhtml")))
                ("Shell-source" (mode . sh-mode))
                ("Makefiles" (or (mode . makefile-mode)
                                 (mode . GNUmakefile)
