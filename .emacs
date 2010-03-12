@@ -333,7 +333,7 @@ that file in the other window and position point on that line."
  '(mode-line ((((class color) (min-colors 88)) (:background "grey55" :foreground "black" :box 1))))
  '(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :color "grey40")))))
  '(next-line-add-newlines t)
- '(safe-local-variable-values (quote ((c-file-offsets (substatement-open . 0)) (prompt-to-byte-compile) (c-indentation-style . k&r) (indent-tabs-mode . 1) (folded-file . t))))
+ '(safe-local-variable-values (quote ((c-file-offsets (substatement-open . 0)) (prompt-to-byte-compile) (c-indentation-style . k&r) (folded-file . t))))
  '(show-paren-mode t)
  '(smerge-refined-change ((t (:background "yellow" :foreground "black"))))
  '(tab-always-indent t)
