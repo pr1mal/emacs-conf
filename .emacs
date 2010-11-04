@@ -3,8 +3,8 @@
 
 ; define load path
 (add-to-list 'load-path "~/.emacs.d/elisp")
-(add-to-list 'load-path "~/.emacs.d/elisp/emacs-rails")
-(add-to-list 'load-path "~/share/emacs/site-lisp")
+;(add-to-list 'load-path "~/.emacs.d/elisp/emacs-rails")
+;(add-to-list 'load-path "~/share/emacs/site-lisp")
 
 ;(load-file ".gnus")
 
@@ -13,11 +13,11 @@
 (global-font-lock-mode t)
 (setq visible-bell 1)
 (menu-bar-mode -1)
-;;(scroll-bar-mode -1)
+(scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode t)
 
-(require 'git)
+;(require 'git)
 
 ;;;/-----------------
 ;;; Functions
@@ -77,15 +77,15 @@
 ;;;/-----------------
 ;;; Keybindings
 
-(define-key global-map [f12] ; call or close todoo buffer
-  'todoo-or-close-todo)
+(define-key global-map [f12] ; open magit status buffer
+  'magit-status)
 
 (define-key global-map [f8]             ; kill current buffer
   (lambda () (interactive) (kill-buffer (current-buffer))))
 
 ;;(define-key global-map [home] ; move to the first non-space character on the line
 ;;  'back-to-indentation)
-(define-key global-map "\r"   ; auto-indent on pressing <enter>
+(define-key global-map (kbd "RET")   ; auto-indent on pressing <enter>
   'newline-and-indent)
 
 ;; move current line up and down
@@ -95,9 +95,9 @@
 ;; kill whole line
 (define-key global-map "\C-c\C-dl" 'my-kill-whole-line)
 
-;; switch between emacs windows up and down
-(global-set-key "\C-c\C-wk"   (lambda () (interactive) (other-window -1)))
-(global-set-key "\C-c\C-wj"   (lambda () (interactive) (other-window  1)))
+;; switch between emacs windows in reverse direction
+(global-set-key (kbd "C-x O")   (lambda () (interactive) (other-window -1)))
+;(global-set-key "\C-c\C-wj"   (lambda () (interactive) (other-window  1)))
 
 ;; switch between ElScreen's tabs
 (global-set-key "\C-c[" (lambda () (interactive) (elscreen-previous)))
@@ -112,8 +112,7 @@
 ;;;/-----------------
 ;;; C++-Mode options
 
-(setq c++-mode-hook
-      (function (lambda ()
+(defun my-c++-mode-hook ()
                   (c-set-style "stroustrup")
                   (font-lock-mode)
                   (c-set-offset 'substatement-open 0)
@@ -122,11 +121,12 @@
                   (c-set-offset 'arglist-intro 2)
                   (c-set-offset 'arglist-close 0)
                   (setq tab-width 4)
-                  )))
+                  (setq indent-tabs-mode t)
+                  )
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
 ;; CC-Mode options
 ;; ---------------
-(setq c-mode-hook
-      (function (lambda ()
+(defun my-c-mode-hook ()
                   (c-set-style "stroustrup")
                   (abbrev-mode 1)
                   (auto-fill-mode 1)
@@ -136,7 +136,9 @@
                   (c-set-offset 'arglist-intro 2)
                   (c-set-offset 'arglist-close 0)
                   (setq tab-width 4)
-                  )))
+                  (setq indent-tabs-mode t)
+                  )
+(add-hook 'c-mode-hook 'my-c-mode-hook)
 
 ;;;\-----------------
 
@@ -190,20 +192,20 @@ that file in the other window and position point on that line."
            (error "No ruby location on line.")))))
 
 ;; Turn on hilight on YAML files
-(add-to-list 'auto-mode-alist '("\\.yaml$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.yml$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;;; Ruby on Rails
-(defun try-complete-abbrev (old)
-  (if (expand-abbrev) t nil))
-(setq hippie-expand-try-functions-list
-      '(try-complete-abbrev
-        try-complete-file-name
-        try-expand-dabbrev))
-(require 'rails)
+;(defun try-complete-abbrev (old)
+;  (if (expand-abbrev) t nil))
+;(setq hippie-expand-try-functions-list
+;      '(try-complete-abbrev
+;        try-complete-file-name
+;        try-expand-dabbrev))
+;(require 'rails)
 
 ; hilight for .rhtml files
-(require 'arorem-rhtml)
+;(require 'arorem-rhtml)
 
 ;;;\-----------------
 
@@ -214,11 +216,12 @@ that file in the other window and position point on that line."
 (setq ibuffer-saved-filter-groups
       (quote (("default"
                ("dired" (mode . dired-mode))
-               ("C-source" (mode . c-mode))
-               ("C++-source" (mode . c++-mode))
+               ("C-source" (or (mode . c-mode)
+                               (mode . c++-mode)))
                ("Ruby-source" (mode . ruby-mode))
                ("ERB-source" (or (name . ".*\\.erb")
                                  (name . ".*\\.rhtml")))
+	       ("Javascript" (mode . js2-mode))
                ("Shell-source" (mode . sh-mode))
                ("Makefiles" (or (mode . makefile-mode)
                                 (mode . GNUmakefile)
@@ -257,6 +260,8 @@ that file in the other window and position point on that line."
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+(setq org-agenda-files '())
+(add-to-list 'org-agenda-files "~/Documents/org-notes/")
 
 ;;;/-----------------
 ;;; ERC settings
@@ -321,6 +326,7 @@ that file in the other window and position point on that line."
  '(ediff-odd-diff-B ((((class color) (min-colors 16)) (:background "light grey" :foreground "Black" :inverse-video t))))
  '(ediff-odd-diff-C ((((class color) (min-colors 16)) (:background "Black" :foreground "light grey"))))
  '(fill-column 90)
+ '(flymake-errline ((((class color)) (:background "#701312"))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background light)) (:foreground "Orchid4"))))
  '(font-lock-comment-face ((((class color) (min-colors 88) (background dark)) (:foreground "#43d392"))))
  '(font-lock-constant-face ((nil (:foreground "palegreen3"))))
@@ -342,5 +348,19 @@ that file in the other window and position point on that line."
  '(trailing-whitespace ((((class color) (background dark)) (:background "red1" :foreground "white"))))
  '(transient-mark-mode t)
  '(whitespace-modes (quote (awk-mode)))
- '(whitespace-silent t))
+ '(whitespace-silent t)
+ '(woman-bold ((((background dark)) (:foreground "white" :weight bold)))))
 ;;)
+
+(setq write-file-functions nil)
+
+
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))
