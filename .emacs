@@ -204,7 +204,7 @@ that file in the other window and position point on that line."
      	  (lambda () (rinari-launch)))
 
 ;; RSense
-(setq rsense-home "~/soft/rsense")
+(setq rsense-home (expand-file-name "~/soft/rsense"))
 (add-to-list 'load-path (concat rsense-home "/etc"))
 (require 'rsense)
 
