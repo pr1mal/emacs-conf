@@ -3,10 +3,6 @@
 
 ; define load path
 (add-to-list 'load-path "~/.emacs.d/elisp")
-;(add-to-list 'load-path "~/.emacs.d/elisp/emacs-rails")
-;(add-to-list 'load-path "~/share/emacs/site-lisp")
-
-;(load-file ".gnus")
 
 (setq inhibit-startup-message t)
 (show-paren-mode t)
@@ -17,7 +13,14 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode t)
 
-;(require 'git)
+;; autocomplete
+(require 'auto-complete)
+(add-to-list 'ac-dictionary-directories "/usr/share/auto-complete/dict/")
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; ElScreen
+(require 'elscreen)
 
 ;;;/-----------------
 ;;; Functions
@@ -83,8 +86,8 @@
 (define-key global-map [f8]             ; kill current buffer
   (lambda () (interactive) (kill-buffer (current-buffer))))
 
-;;(define-key global-map [home] ; move to the first non-space character on the line
-;;  'back-to-indentation)
+(define-key global-map [home] ; move to the first non-space character on the line
+  'back-to-indentation)
 (define-key global-map (kbd "RET")   ; auto-indent on pressing <enter>
   'newline-and-indent)
 
@@ -93,11 +96,10 @@
 (define-key global-map "\C-cj" 'my-move-line-down)
 
 ;; kill whole line
-(define-key global-map "\C-c\C-dl" 'my-kill-whole-line)
+(define-key global-map "\C-cd" 'my-kill-whole-line)
 
 ;; switch between emacs windows in reverse direction
 (global-set-key (kbd "C-x O")   (lambda () (interactive) (other-window -1)))
-;(global-set-key "\C-c\C-wj"   (lambda () (interactive) (other-window  1)))
 
 ;; switch between ElScreen's tabs
 (global-set-key "\C-c[" (lambda () (interactive) (elscreen-previous)))
@@ -195,17 +197,16 @@ that file in the other window and position point on that line."
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
-;;; Ruby on Rails
-;(defun try-complete-abbrev (old)
-;  (if (expand-abbrev) t nil))
-;(setq hippie-expand-try-functions-list
-;      '(try-complete-abbrev
-;        try-complete-file-name
-;        try-expand-dabbrev))
-;(require 'rails)
-
 ; hilight for .rhtml files
-;(require 'arorem-rhtml)
+(add-to-list 'load-path "~/.emacs.d/elisp/rhtml")
+(require 'rhtml-mode)
+(add-hook 'rhtml-mode-hook
+     	  (lambda () (rinari-launch)))
+
+;; RSense
+(setq rsense-home "~/soft/rsense")
+(add-to-list 'load-path (concat rsense-home "/etc"))
+(require 'rsense)
 
 ;;;\-----------------
 
