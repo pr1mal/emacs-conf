@@ -22,6 +22,15 @@
 ;; ElScreen
 (require 'elscreen)
 
+;; stuff from ~/.emacs.d/elisp
+(require 'snippet)
+(require 'ruby-compilation)
+(require 'ruby-electric)
+
+;; MaGit
+(require 'magit)
+(require 'magit-svn)
+
 ;;;/-----------------
 ;;; Functions
 
@@ -102,9 +111,10 @@
 (global-set-key (kbd "C-x O")   (lambda () (interactive) (other-window -1)))
 
 ;; switch between ElScreen's tabs
-(global-set-key "\C-c[" (lambda () (interactive) (elscreen-previous)))
-(global-set-key "\C-c]" (lambda () (interactive) (elscreen-next)))
+(global-set-key (kbd "C-z [") (lambda () (interactive) (elscreen-previous)))
+(global-set-key (kbd "C-z ]") (lambda () (interactive) (elscreen-next)))
 
+;; reload .emacs
 (global-set-key "\C-c\C-re" 'my-reload-dot-emacs)
 
 (define-key global-map "\^h\^h" 'ruby-visit-source)
@@ -151,9 +161,6 @@
           (lambda ()
             (define-key ruby-mode-map "\C-x\C-e" ; toggle ruby-electric mode
               (ruby-electric-mode))))
-
-;; enable auto insert matching braces, "end"s etc
-(require 'ruby-electric)
 
 ;; Jump to error line in ruby source from backtrace
 (defun ruby-visit-source ()
@@ -207,6 +214,11 @@ that file in the other window and position point on that line."
 (setq rsense-home (expand-file-name "~/soft/rsense"))
 (add-to-list 'load-path (concat rsense-home "/etc"))
 (require 'rsense)
+
+;; Complete by C-c .
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c .") 'ac-complete-rsense)))
 
 ;;;\-----------------
 
