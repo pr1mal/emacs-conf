@@ -3,29 +3,30 @@
 
 ; define load path
 (add-to-list 'load-path "~/.emacs.d/elisp")
-
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (setq inhibit-startup-message t)
 (show-paren-mode t)
 (global-font-lock-mode t)
 (setq visible-bell 1)
 (menu-bar-mode -1)
+(tool-bar-mode -1)
 (scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode t)
 
 ;; autocomplete
-(require 'auto-complete)
-(add-to-list 'ac-dictionary-directories "/usr/share/auto-complete/dict/")
-(require 'auto-complete-config)
-(ac-config-default)
+;(require 'auto-complete)
+;(add-to-list 'ac-dictionary-directories "/usr/share/auto-complete/dict/")
+;(require 'auto-complete-config)
+;(ac-config-default)
 
 ;; ElScreen
-(require 'elscreen)
+;(require 'elscreen)
 
 ;; stuff from ~/.emacs.d/elisp
-(require 'snippet)
-(require 'ruby-compilation)
-(require 'ruby-electric)
+;(require 'snippet)
+;(require 'ruby-compilation)
+;(require 'ruby-electric)
 
 ;; MaGit
 (require 'magit)
@@ -111,8 +112,8 @@
 (global-set-key (kbd "C-x O")   (lambda () (interactive) (other-window -1)))
 
 ;; switch between ElScreen's tabs
-(global-set-key (kbd "C-z [") (lambda () (interactive) (elscreen-previous)))
-(global-set-key (kbd "C-z ]") (lambda () (interactive) (elscreen-next)))
+;;(global-set-key (kbd "C-z [") (lambda () (interactive) (elscreen-previous)))
+;;(global-set-key (kbd "C-z ]") (lambda () (interactive) (elscreen-next)))
 
 ;; reload .emacs
 (global-set-key "\C-c\C-re" 'my-reload-dot-emacs)
@@ -201,24 +202,24 @@ that file in the other window and position point on that line."
            (error "No ruby location on line.")))))
 
 ;; Turn on hilight on YAML files
-(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+;(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+;(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ; hilight for .rhtml files
-(add-to-list 'load-path "~/.emacs.d/elisp/rhtml")
-(require 'rhtml-mode)
-(add-hook 'rhtml-mode-hook
-     	  (lambda () (rinari-launch)))
+;(add-to-list 'load-path "~/.emacs.d/elisp/rhtml")
+;(require 'rhtml-mode)
+;(add-hook 'rhtml-mode-hook
+;     	  (lambda () (rinari-launch)))
 
 ;; RSense
-(setq rsense-home (expand-file-name "~/soft/rsense"))
-(add-to-list 'load-path (concat rsense-home "/etc"))
-(require 'rsense)
+;(setq rsense-home (expand-file-name "~/soft/rsense"))
+;(add-to-list 'load-path (concat rsense-home "/etc"))
+;(require 'rsense)
 
 ;; Complete by C-c .
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c .") 'ac-complete-rsense)))
+;(add-hook 'ruby-mode-hook
+;          (lambda ()
+;            (local-set-key (kbd "C-c .") 'ac-complete-rsense)))
 
 ;;;\-----------------
 
@@ -265,16 +266,16 @@ that file in the other window and position point on that line."
 
 ;;;\---------------------
 
-(load-file "/usr/share/emacs/site-lisp/xcscope.el")
-(require 'xcscope)
+;(load-file "/usr/share/emacs/site-lisp/xcscope.el")
+;(require 'xcscope)
 
-(require 'org-install)
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
-(setq org-agenda-files '())
-(add-to-list 'org-agenda-files "~/Documents/org-notes/")
+;(require 'org-install)
+;(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;(define-key global-map "\C-cl" 'org-store-link)
+;(define-key global-map "\C-ca" 'org-agenda)
+;(setq org-log-done t)
+;(setq org-agenda-files '())
+;(add-to-list 'org-agenda-files "~/Documents/org-notes/")
 
 ;;;/-----------------
 ;;; ERC settings
@@ -287,85 +288,9 @@ that file in the other window and position point on that line."
 (setq imap-ssl-program "/usr/bin/openssl s_client -ssl3 -connect %s:%p")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(display-battery-mode t)
- '(highlight-current-line-globally t nil (highlight-current-line))
- '(highlight-current-line-whole-line t)
- '(ibuffer-enable t)
- '(mail-archive-file-name "~/Mail/sent")
- '(mail-default-directory "~/Mail")
- '(mail-from-style (quote angles))
- '(mail-host-address "c71.sam-solutions.net")
- '(mail-source-primary-source (quote nnml))
- '(mail-user-agent (quote gnus-user-agent))
- '(org-insert-mode-line-in-empty-file t)
- '(rails-api-root "/usr/share/doc/rails/html")
- '(rails-ri-command "ri1.8")
- '(read-mail-command (quote gnus))
- '(show-paren-mode t)
- '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
- '(tool-bar-mode nil)
- '(transient-mark-mode t)
- '(user-full-name "Evgeny Sokolov")
- '(user-mail-address "e.sokolov@sam-solutions.net"))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "grey20" :foreground "grey80" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :family "xos4-terminus"))))
- '(cscope-line-number-face ((((class color) (background dark)) (:foreground "red1"))))
- '(cursor ((t (:background "orange"))))
- '(custom-button ((((type x w32 mac) (class color)) (:background "grey70" :foreground "black" :box 1))))
- '(custom-button-mouse ((((type x w32 mac) (class color)) (:background "grey90" :foreground "black" :box 1))))
- '(custom-button-pressed ((((type x w32 mac) (class color)) (:background "white" :foreground "grey" :box 2))))
- '(delete-selection-mode t)
- '(diff-added ((t (:inherit diff-changed :foreground "green"))))
- '(diff-removed ((t (:inherit diff-changed :foreground "red"))))
- '(ediff-current-diff-A ((((class color) (min-colors 16)) (:background "gray30" :foreground "white"))))
- '(ediff-current-diff-B ((((class color) (min-colors 16)) (:background "gray40" :foreground "white"))))
- '(ediff-even-diff-A ((((class color) (min-colors 16)) (:background "white" :foreground "Black" :inverse-video t))))
- '(ediff-even-diff-Ancestor ((((class color) (min-colors 16)) (:background "black" :foreground "White"))))
- '(ediff-even-diff-B ((((class color) (min-colors 16)) (:background "black" :foreground "White"))))
- '(ediff-even-diff-C ((((class color) (min-colors 16)) (:background "white" :foreground "Black" :inverse-video t))))
- '(ediff-fine-diff-A ((((class color) (min-colors 16)) (:background "sky blue" :foreground "Navy" :inverse-video nil))))
- '(ediff-fine-diff-B ((((class color) (min-colors 16)) (:background "skyblue3" :foreground "black"))))
- '(ediff-odd-diff-A ((((class color) (min-colors 16)) (:background "black" :foreground "light grey"))))
- '(ediff-odd-diff-B ((((class color) (min-colors 16)) (:background "light grey" :foreground "Black" :inverse-video t))))
- '(ediff-odd-diff-C ((((class color) (min-colors 16)) (:background "Black" :foreground "light grey"))))
- '(fill-column 90)
- '(flymake-errline ((((class color)) (:background "#701312"))))
- '(font-lock-builtin-face ((((class color) (min-colors 88) (background light)) (:foreground "Orchid4"))))
- '(font-lock-comment-face ((((class color) (min-colors 88) (background dark)) (:foreground "#43d392"))))
- '(font-lock-constant-face ((nil (:foreground "palegreen3"))))
- '(font-lock-doc-face ((t (:foreground "steelblue2"))))
- '(font-lock-function-name-face ((nil (:foreground "lightblue" :weight bold))))
- '(font-lock-keyword-face ((nil (:foreground "#f1f1b1" :weight bold))))
- '(font-lock-string-face ((nil (:foreground "#fff6b5"))))
- '(highlight-current-line-face ((t (:background "grey25"))))
- '(kill-whole-line t)
- '(mode-line ((((class color) (min-colors 88)) (:background "grey55" :foreground "black" :box 1))))
- '(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :color "grey40")))))
- '(next-line-add-newlines t)
- '(safe-local-variable-values (quote ((c-file-offsets (substatement-open . 0)) (prompt-to-byte-compile) (c-indentation-style . k&r) (folded-file . t))))
- '(show-paren-mode t)
- '(smerge-refined-change ((t (:background "yellow" :foreground "black"))))
- '(tab-always-indent t)
- '(tab-width 2)
- '(tooltip ((((class color)) (:background "lightyellow" :foreground "black"))))
- '(trailing-whitespace ((((class color) (background dark)) (:background "red1" :foreground "white"))))
- '(transient-mark-mode t)
- '(whitespace-modes (quote (awk-mode)))
- '(whitespace-silent t)
- '(woman-bold ((((background dark)) (:foreground "white" :weight bold)))))
-;;)
 
-(setq write-file-functions nil)
+
+;(setq write-file-functions nil)
 
 
 ;;; This was installed by package-install.el.
@@ -373,7 +298,7 @@ that file in the other window and position point on that line."
 ;;; interfacing with ELPA, the package archive.
 ;;; Move this code earlier if you want to reference
 ;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
+;(when
+;    (load
+;     (expand-file-name "~/.emacs.d/elpa/package.el"))
+;  (package-initialize))
