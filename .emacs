@@ -14,20 +14,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode t)
 
-;; autocomplete
-;(require 'auto-complete)
-;(add-to-list 'ac-dictionary-directories "/usr/share/auto-complete/dict/")
-;(require 'auto-complete-config)
-;(ac-config-default)
-
-;; ElScreen
-;(require 'elscreen)
-
-;; stuff from ~/.emacs.d/elisp
-;(require 'snippet)
-;(require 'ruby-compilation)
-;(require 'ruby-electric)
-
 ;; MaGit
 (require 'magit)
 (require 'magit-svn)
@@ -90,7 +76,7 @@
 ;;;/-----------------
 ;;; Keybindings
 
-(define-key global-map [f12] ; open magit status buffer
+(define-key global-map (kbd "C-c p") ; open magit status buffer
   'magit-status)
 
 (define-key global-map [f8]             ; kill current buffer
@@ -110,10 +96,6 @@
 
 ;; switch between emacs windows in reverse direction
 (global-set-key (kbd "C-x O")   (lambda () (interactive) (other-window -1)))
-
-;; switch between ElScreen's tabs
-;;(global-set-key (kbd "C-z [") (lambda () (interactive) (elscreen-previous)))
-;;(global-set-key (kbd "C-z ]") (lambda () (interactive) (elscreen-next)))
 
 ;; reload .emacs
 (global-set-key "\C-c\C-re" 'my-reload-dot-emacs)
@@ -201,26 +183,6 @@ that file in the other window and position point on that line."
           (t
            (error "No ruby location on line.")))))
 
-;; Turn on hilight on YAML files
-;(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
-;(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-
-; hilight for .rhtml files
-;(add-to-list 'load-path "~/.emacs.d/elisp/rhtml")
-;(require 'rhtml-mode)
-;(add-hook 'rhtml-mode-hook
-;     	  (lambda () (rinari-launch)))
-
-;; RSense
-;(setq rsense-home (expand-file-name "~/soft/rsense"))
-;(add-to-list 'load-path (concat rsense-home "/etc"))
-;(require 'rsense)
-
-;; Complete by C-c .
-;(add-hook 'ruby-mode-hook
-;          (lambda ()
-;            (local-set-key (kbd "C-c .") 'ac-complete-rsense)))
-
 ;;;\-----------------
 
 ;;;/-----------------
@@ -252,6 +214,7 @@ that file in the other window and position point on that line."
                ("VC" (or
                        (name . "^\\*svn-.*\\*$")
                        (name . "^\\*git-.*\\*$")
+		       (name . "^\\*magit.*$")
                        (name . "^\\*cvs.*\\*$")
                        (name . "^\\*[Vv][Cc].*\\*$")))
               ))))
@@ -266,16 +229,13 @@ that file in the other window and position point on that line."
 
 ;;;\---------------------
 
-;(load-file "/usr/share/emacs/site-lisp/xcscope.el")
-;(require 'xcscope)
-
-;(require 'org-install)
-;(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;(define-key global-map "\C-cl" 'org-store-link)
-;(define-key global-map "\C-ca" 'org-agenda)
-;(setq org-log-done t)
-;(setq org-agenda-files '())
-;(add-to-list 'org-agenda-files "~/Documents/org-notes/")
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+(setq org-agenda-files '())
+(add-to-list 'org-agenda-files "~/Documents/org-notes/")
 
 ;;;/-----------------
 ;;; ERC settings
@@ -298,7 +258,7 @@ that file in the other window and position point on that line."
 ;;; interfacing with ELPA, the package archive.
 ;;; Move this code earlier if you want to reference
 ;;; packages in your .emacs.
-;(when
-;    (load
-;     (expand-file-name "~/.emacs.d/elpa/package.el"))
-;  (package-initialize))
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))
