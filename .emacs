@@ -13,6 +13,7 @@
 (scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default indent-tabs-mode t)
+(setq save-abbrevs nil)
 
 ;; MaGit
 (require 'magit)
@@ -70,8 +71,6 @@
     (call-interactively 'todoo)))
 
 ;;;\-----------------
-
-(fset 'yes-or-no-p 'y-or-n-p)
 
 ;;;/-----------------
 ;;; Keybindings
