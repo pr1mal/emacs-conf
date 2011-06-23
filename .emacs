@@ -12,8 +12,12 @@
 ;(tool-bar-mode -1)
 ;(scroll-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq-default indent-tabs-mode t)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 (setq save-abbrevs nil)
+(global-hl-line-mode 1)
+(line-number-mode t)
+(column-number-mode t)
 
 ;; MaGit
 (require 'magit)
@@ -63,12 +67,11 @@
           (previous-line 1)
           (move-to-column my-previous-column)))))
 
-(defun todoo-or-close-todo ()
-  "Call todoo buffer and close it if already in it"
+(defun my-untabify-buffer ()
+  "Untabify current buffer"
   (interactive)
-  (if (eq major-mode 'todoo-mode)
-      (call-interactively 'todoo-save-and-exit)
-    (call-interactively 'todoo)))
+  (mark-whole-buffer)
+  (untabify))
 
 ;;;\-----------------
 
@@ -78,28 +81,28 @@
 (define-key global-map (kbd "C-c p") ; open magit status buffer
   'magit-status)
 
-(define-key global-map [f8]             ; kill current buffer
+(define-key global-map (kbd "C-x k")             ; kill current buffer
   (lambda () (interactive) (kill-buffer (current-buffer))))
 
-(define-key global-map [home] ; move to the first non-space character on the line
+(define-key global-map (kbd "C-A") ; move to the first non-space character on the line
   'back-to-indentation)
 (define-key global-map (kbd "RET")   ; auto-indent on pressing <enter>
   'newline-and-indent)
 
 ;; move current line up and down
-(define-key global-map "\C-ck" 'my-move-line-up)
-(define-key global-map "\C-cj" 'my-move-line-down)
+(define-key global-map (kbd "C-c k") 'my-move-line-up)
+(define-key global-map (kbd "C-c j") 'my-move-line-down)
 
 ;; kill whole line
-(define-key global-map "\C-cd" 'my-kill-whole-line)
+(define-key global-map (kbd "C-c d") 'my-kill-whole-line)
 
 ;; switch between emacs windows in reverse direction
 (global-set-key (kbd "C-x O")   (lambda () (interactive) (other-window -1)))
 
 ;; reload .emacs
-(global-set-key "\C-c\C-re" 'my-reload-dot-emacs)
+(global-set-key (kbd "C-c C-r e") 'my-reload-dot-emacs)
 
-(define-key global-map "\^h\^h" 'ruby-visit-source)
+(define-key global-map (kbd "C-h C-h") 'ruby-visit-source)
 
 ;;;\-----------------
 
@@ -107,31 +110,29 @@
 ;;; C++-Mode options
 
 (defun my-c++-mode-hook ()
-                  (c-set-style "stroustrup")
-                  (font-lock-mode)
-                  (c-set-offset 'substatement-open 0)
-                  (c-set-offset 'statement-case-open 0)
-                  (c-set-offset 'case-label 4)
-                  (c-set-offset 'arglist-intro 2)
-                  (c-set-offset 'arglist-close 0)
-                  (setq tab-width 4)
-                  (setq indent-tabs-mode t)
-                  )
+  (c-set-style "stroustrup")
+  (font-lock-mode)
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'statement-case-open 0)
+  (c-set-offset 'case-label 4)
+  (c-set-offset 'arglist-intro 2)
+  (c-set-offset 'arglist-close 0)
+  (setq tab-width 4)
+  (setq indent-tabs-mode t))
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 ;; CC-Mode options
 ;; ---------------
 (defun my-c-mode-hook ()
-                  (c-set-style "stroustrup")
-                  (abbrev-mode 1)
-                  (auto-fill-mode 1)
-                  (c-set-offset 'substatement-open 0)
-                  (c-set-offset 'statement-case-open 0)
-                  (c-set-offset 'case-label 4)
-                  (c-set-offset 'arglist-intro 2)
-                  (c-set-offset 'arglist-close 0)
-                  (setq tab-width 4)
-                  (setq indent-tabs-mode t)
-                  )
+  (c-set-style "stroustrup")
+  (abbrev-mode 1)
+  (auto-fill-mode 1)
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'statement-case-open 0)
+  (c-set-offset 'case-label 4)
+  (c-set-offset 'arglist-intro 2)
+  (c-set-offset 'arglist-close 0)
+  (setq tab-width 4)
+  (setq indent-tabs-mode t))
 (add-hook 'c-mode-hook 'my-c-mode-hook)
 
 ;;;\-----------------
@@ -141,7 +142,7 @@
 
 (add-hook 'ruby-mode-hook
           (lambda ()
-            (define-key ruby-mode-map "\C-x\C-e" ; toggle ruby-electric mode
+            (define-key ruby-mode-map (kbd "C-x C-e") ; toggle ruby-electric mode
               (ruby-electric-mode))))
 
 ;; Jump to error line in ruby source from backtrace
@@ -196,7 +197,9 @@ that file in the other window and position point on that line."
                ("Ruby-source" (mode . ruby-mode))
                ("ERB-source" (or (name . ".*\\.erb")
                                  (name . ".*\\.rhtml")))
-	       ("Javascript" (mode . js2-mode))
+               ("Javascript" (or
+                              (mode . js2-mode)
+                              (mode . js-mode)))
                ("Shell-source" (mode . sh-mode))
                ("Makefiles" (or (mode . makefile-mode)
                                 (mode . GNUmakefile)
@@ -211,12 +214,13 @@ that file in the other window and position point on that line."
 ;;                         (name . "^\\*Summary.*$")
 ;;                         (name . "^\\*Group\\*$")))
                ("VC" (or
-                       (name . "^\\*svn-.*\\*$")
-                       (name . "^\\*git-.*\\*$")
-		       (name . "^\\*magit.*$")
-                       (name . "^\\*cvs.*\\*$")
-                       (name . "^\\*[Vv][Cc].*\\*$")))
-              ))))
+                      (name . "^\\*svn-.*\\*$")
+                      (name . "^\\*git-.*\\*$")
+                      (name . "^\\*magit.*$")
+                      (name . "^\\*cvs.*\\*$")
+                      (name . "^\\*[Vv][Cc].*\\*$")))
+               ("ERC" (mode . erc-mode))
+           ))))
 
 ;; ibuffer, I like my buffers to be grouped
 (add-hook 'ibuffer-mode-hook
@@ -230,8 +234,8 @@ that file in the other window and position point on that line."
 
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map (kbd "C-c l") 'org-store-link)
+(define-key global-map (kbd "C-c a") 'org-agenda)
 (setq org-log-done t)
 (setq org-agenda-files '())
 (add-to-list 'org-agenda-files "~/Documents/org-notes/")
@@ -261,3 +265,15 @@ that file in the other window and position point on that line."
     (load
      (expand-file-name "~/.emacs.d/elpa/package.el"))
   (package-initialize))
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ido-mode (quote buffer) nil (ido)))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
