@@ -81,6 +81,8 @@
 (define-key global-map (kbd "C-c p") ; open magit status buffer
   'magit-status)
 
+(define-key global-map (kbd "C-c C-c u") 'blank-mode)
+
 (define-key global-map (kbd "C-x k")             ; kill current buffer
   (lambda () (interactive) (kill-buffer (current-buffer))))
 
@@ -134,6 +136,14 @@
   (setq tab-width 4)
   (setq indent-tabs-mode t))
 (add-hook 'c-mode-hook 'my-c-mode-hook)
+
+;;;\-----------------
+
+;;;/-----------------
+;;; Javascript settings
+
+; use js-mode because it handles indentation better
+(add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
 
 ;;;\-----------------
 
@@ -270,6 +280,7 @@ that file in the other window and position point on that line."
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(blank-line-length 120)
  '(ido-mode (quote buffer) nil (ido)))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
