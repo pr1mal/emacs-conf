@@ -70,8 +70,7 @@
 (defun my-untabify-buffer ()
   "Untabify current buffer"
   (interactive)
-  (mark-whole-buffer)
-  (untabify))
+  (untabify (point-min) (point-max)))
 
 ;;;\-----------------
 
