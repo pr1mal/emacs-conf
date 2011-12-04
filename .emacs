@@ -64,6 +64,10 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 130 :family "Envy Code R"))))
  '(cursor ((t (:background "black" :inverse-video nil))))
+ '(diff-added ((t (:foreground "light green"))))
+ '(diff-added-face ((t (:background "light green"))) t)
+ '(diff-removed ((t (:foreground "light pink"))))
+ '(diff-removed-face ((t (:background "light pink"))) t)
  '(magit-diff-add ((((class color) (background light)) (:foreground "green4"))))
  '(magit-diff-file-header ((t (:inherit magit-header :background "lightgreen"))))
  '(region ((t (:background "khaki3" :foreground "black")))))
