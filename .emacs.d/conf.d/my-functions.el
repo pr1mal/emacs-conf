@@ -4,7 +4,7 @@
 (defun my-reload-dot-emacs ()
   "reloads .emacs"
   (interactive)
-  (load-file "~/.emacs"))
+  (load-file "~/.emacs.d/init.el"))
 
 (defun my-kill-whole-line ()
    "Kill an entire line, including trailing newline"

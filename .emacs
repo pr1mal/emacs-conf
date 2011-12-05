@@ -9,25 +9,6 @@
 (add-to-list 'load-path "~/.emacs.d/conf.d")
 (mapc 'load (directory-files "~/.emacs.d/conf.d" nil "^[^#].*el$"))
 
-;(require 'personal)
-
-;;;\-----------------
-
-;;;\-----------------
-
-;;\-----------------
-
-
-;;;\---------------------
-
-;;;/-----------------
-;;; ERC settings
-
-(setq erc-server-conding-system '(windows-1251 . windows-1251))
-      ;;;erc-encoding-coding-alist '(("#test" . windows-1251)))
-
-;;;\----------------
-
 (setq imap-ssl-program "/usr/bin/openssl s_client -ssl3 -connect %s:%p")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
