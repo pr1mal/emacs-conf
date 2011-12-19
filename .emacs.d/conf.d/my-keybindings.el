@@ -29,3 +29,9 @@
 
 ;; use ibuffer for managing buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; resize windows
+(global-set-key (kbd "<f5>") 'shrink-window-horizontally)
+(global-set-key (kbd "<f6>") 'enlarge-window-horizontally)
+(global-set-key (kbd "<f7>") 'shrink-window)
+(global-set-key (kbd "<f8>") 'enlarge-window)

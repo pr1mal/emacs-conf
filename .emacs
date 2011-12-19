@@ -1,6 +1,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; -*- elisp -*-
 
+;; set up package archives
+(setq package-archives '(("ELPA" . "http://tromey.com/elpa/") 
+                          ("gnu" . "http://elpa.gnu.org/packages/")
+                          ("marmalade" . "http://marmalade-repo.org/packages/")))
+
 ; define load path
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
@@ -13,19 +18,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;(setq write-file-functions nil)
 
-
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
+(set-frame-font "Envy Code R-13") ;; for some reason 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -45,10 +44,9 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 130 :family "Envy Code R"))))
  '(cursor ((t (:background "black" :inverse-video nil))))
- '(diff-added ((t (:foreground "light green"))))
- '(diff-added-face ((t (:background "light green"))) t)
- '(diff-removed ((t (:foreground "light pink"))))
- '(diff-removed-face ((t (:background "light pink"))) t)
- '(magit-diff-add ((((class color) (background light)) (:foreground "green4"))))
+ '(diff-added ((t (:background "light green"))))
+ '(diff-removed ((t (:background "light pink"))))
+ '(magit-diff-add ((t (:foreground "green4"))))
  '(magit-diff-file-header ((t (:inherit magit-header :background "lightgreen"))))
+ '(magit-item-highlight ((t (:slant italic))))
  '(region ((t (:background "khaki3" :foreground "black")))))

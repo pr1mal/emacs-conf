@@ -44,7 +44,12 @@
           (lambda ()
             (define-key ruby-mode-map (kbd "C-x C-e") ; toggle ruby-electric mode
               (ruby-electric-mode))))
-
+;; (require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$"  . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("^Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("^Gemfile$"  . ruby-mode))
 ;;;\-----------------
 
 ;;;/-----------------
