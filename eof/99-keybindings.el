@@ -9,7 +9,7 @@
 (define-key global-map (kbd "C-x k")             ; kill current buffer
   (lambda () (interactive) (kill-buffer (current-buffer))))
 
-(define-key global-map (kbd "C-A") ; move to the first non-space character on the line
+(define-key global-map (kbd "C-S-A") ; move to the first non-space character on the line
   'back-to-indentation)
 (define-key global-map (kbd "RET")   ; auto-indent on pressing <enter>
   'newline-and-indent)
