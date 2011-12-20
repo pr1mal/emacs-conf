@@ -1,3 +1,9 @@
 /.emacs~
 *~
 .*~
+elpa/
+places
+backups/
+.smex-items
+auto-save-list/
+
