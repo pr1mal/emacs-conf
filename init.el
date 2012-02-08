@@ -35,5 +35,7 @@
 (setq *is-carbon-emacs* (and *is-a-mac* (eq window-system 'mac)))
 (setq *is-cocoa-emacs* (and *is-a-mac* (eq window-system 'ns)))
 
-(when (and *is-a-mac* window-system)
-  (set-frame-font "Envy Code R-13")) ;; mac emacs doesn't honor :default font settings
+(cond ((and *is-a-mac* window-system)
+       (set-frame-font "Envy Code R-13")) ;; mac emacs doesn't honor :default font settings
+      ((window-system)
+       (set-frame-font "Envy Code R-10")))
