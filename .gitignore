@@ -7,3 +7,4 @@ backups/
 .smex-items
 auto-save-list/
 
+/custom-file.el
