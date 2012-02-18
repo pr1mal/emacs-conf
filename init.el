@@ -39,3 +39,6 @@
        (set-frame-font "Envy Code R-13")) ;; mac emacs doesn't honor :default font settings
       ((window-system)
        (set-frame-font "Envy Code R-10")))
+
+(setq custom-file "~/.emacs.d/custom-file.el")
+(load custom-file)
