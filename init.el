@@ -12,7 +12,6 @@
 (defvar my-packages '(starter-kit 
                       starter-kit-ruby
                       starter-kit-bindings
-                      starter-kit-js
                       magit
                       blank-mode
                       lua-mode
@@ -21,7 +20,9 @@
                       yaml-mode
                       js2-mode
                       full-ack
+                      color-theme
                       color-theme-solarized
+                      expand-region
                       company)
   "A list of packages to ensure are installed at launch.")
 
@@ -36,7 +37,7 @@
 (setq *is-cocoa-emacs* (and *is-a-mac* (eq window-system 'ns)))
 
 (cond ((and *is-a-mac* window-system)
-       (set-frame-font "Envy Code R-13")) ;; mac emacs doesn't honor :default font settings
+       (set-frame-font "Consolas-13")) ;; mac emacs doesn't honor :default font settings
       ((window-system)
        (set-frame-font "Envy Code R-10")))
 
