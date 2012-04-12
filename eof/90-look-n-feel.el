@@ -1,8 +1,6 @@
-;; Solarized
+;; Solarized theme stuff
 
 (setq current-theme 'light)
-(eval-after-load "color-theme-solarized-autoloads"
-  '(if window-system (progn (color-theme-solarized-light))))
 
 (defun toggle-solarized-dark-light ()
   "Toggle light and dark solarized themes"
