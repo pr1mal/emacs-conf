@@ -21,7 +21,9 @@
                ("emacs" (or
                          (name . "^\\*scratch\\*$")
                          (name . "^\\*Messages\\*$")
-                         (name . "^\\.emacs$")))
+                         (name . "^\\.emacs$")
+                         (name . ".*\\.el$")
+                         (mode . emacs-lisp-mode)))
        ;;         ("Gnus" (or
 ;;                         (name . "^\\*Article\\*$")
 ;;                         (name . "^\\*Summary.*$")

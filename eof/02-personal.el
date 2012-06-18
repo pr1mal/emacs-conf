@@ -9,7 +9,9 @@
   (if window-system
       (progn (tool-bar-mode -1) ; turn off toolbar
              (scroll-bar-mode -1) ; turn off scrillbars
-             (menu-bar-mode 1)) ; show menubar
+             (if (eq system-type 'darwin)
+                 (menu-bar-mode 1) ; show menubar
+               (menu-bar-mode -1)))
     (menu-bar-mode -1)) ; turn off menubar in terminal mode
 
   (fset 'yes-or-no-p 'y-or-n-p) ; use y or n instead of yes or no

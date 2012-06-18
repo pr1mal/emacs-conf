@@ -1,4 +1,4 @@
-/.emacs~
+~/.emacs~
 *~
 .*~
 elpa/
@@ -6,5 +6,5 @@ places
 backups/
 .smex-items
 auto-save-list/
-
 url/
+custom-file.el
