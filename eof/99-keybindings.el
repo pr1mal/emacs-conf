@@ -9,7 +9,8 @@
 (define-key global-map (kbd "C-x k")             ; kill current buffer
   (lambda () (interactive) (kill-buffer (current-buffer))))
 
-(define-key global-map (kbd "C-S-A") ; move to the first non-space character on the line
+(define-key global-map (kbd "C-S-a") 'move-beginning-of-line)
+(define-key global-map (kbd "C-a") ; move to the first non-space character on the line
   'back-to-indentation)
 (define-key global-map (kbd "RET")   ; auto-indent on pressing <enter>
   'newline-and-indent)
@@ -38,3 +39,5 @@
 
 ;; expand region selection
 (global-set-key (kbd "C-@") 'er/expand-region)
+
+(define-key global-map (kbd "C-c C-c f") 'format-patch)

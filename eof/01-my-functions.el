@@ -47,4 +47,15 @@
   (interactive)
   (untabify (point-min) (point-max)))
 
-
+;; wrapper around my format-patch helper script
+;; TODO implement `format-patch' ruby script in elisp
+(setq format-patch-last-used-config "evm")
+(setq format-patch-last-used-patch-name "work-in-progress")
+(defun format-patch (config patch-name)
+  (interactive (list
+                (read-buffer "Use config: " format-patch-last-used-config)
+                (read-buffer "Patch name: " format-patch-last-used-patch-name)))
+  (setq format-patch-last-used-config config
+        format-patch-last-used-patch-name patch-name)
+  (let  ((cmd "/usr/local/bin/format-patch -c %s %s"))
+    (compile (format cmd config patch-name))))
