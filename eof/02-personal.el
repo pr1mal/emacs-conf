@@ -20,6 +20,9 @@
   (setq save-abbrevs nil) ;
   (global-hl-line-mode 1) ; hilight current line globally
   (line-number-mode t) ; show line number in statusbar
+  (setq-default indicate-buffer-boundaries 'left) ; self-descriptive
+  (setq save-place-file "~/.emacs.d/cache/save-place") ; don't mess $HOME
+  (setq-default save-place t) ; save place
   (column-number-mode t)) ; show column number in statusbar
 
 (provide 'personal)

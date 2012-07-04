@@ -41,3 +41,5 @@
 (global-set-key (kbd "C-@") 'er/expand-region)
 
 (define-key global-map (kbd "C-c C-c f") 'format-patch)
+
+(define-key global-map (kbd "C-c C-c c") 'comment-or-uncomment-region)
