@@ -26,8 +26,7 @@
                       full-ack
                       color-theme
                       color-theme-solarized
-                      expand-region
-                      company)
+                      expand-region)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
