@@ -60,3 +60,7 @@
       (setq erlang-root-dir "/usr/local/Cellar/erlang/R14B04/lib/erlang")
       (setq exec-path (cons "/usr/local/Cellar/erlang/R14B04/lib/erlang/bin" exec-path))
       (require 'erlang-start)))
+
+;; compilation buffer stuff
+(setq compilation-scrolloutput t)
+(setq compilation-window-height 16)

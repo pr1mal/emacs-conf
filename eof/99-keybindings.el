@@ -1,7 +1,7 @@
 ;;;/-----------------
 ;;; Keybindings
 
-(define-key global-map (kbd "C-c p") ; open magit status buffer
+(define-key global-map (kbd "C-c C-z") ; open magit status buffer
   'magit-status)
 
 (define-key global-map (kbd "C-c C-c u") 'blank-mode)
