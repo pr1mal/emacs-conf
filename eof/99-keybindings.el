@@ -43,3 +43,5 @@
 (define-key global-map (kbd "C-c C-c f") 'format-patch)
 
 (define-key global-map (kbd "C-c C-c c") 'comment-or-uncomment-region)
+
+(define-key global-map (kbd "C-c w") 'my-copy-line-under-cursor)
