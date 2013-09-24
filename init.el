@@ -40,3 +40,4 @@
 
 (setq custom-file "~/.emacs.d/custom-file.el")
 (if (file-exists-p custom-file) (load custom-file))
+(put 'ido-exit-minibuffer 'disabled nil)
