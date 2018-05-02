@@ -8,3 +8,7 @@ backups/
 auto-save-list/
 url/
 custom-file.el
+
+.files
+
+.open-files

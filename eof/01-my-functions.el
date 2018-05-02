@@ -59,3 +59,12 @@
         format-patch-last-used-patch-name patch-name)
   (let  ((cmd "/usr/local/bin/format-patch -c %s %s"))
     (compile (format cmd config patch-name))))
+
+;; saves line under cursor into kill-ring
+(defun my-copy-line-under-cursor ()
+  (interactive)
+  (back-to-indentation)
+  (push-mark (point) nil)
+  (move-end-of-line nil)
+  (kill-ring-save (mark) (point))
+  (message "current line saved in kill-ring"))
