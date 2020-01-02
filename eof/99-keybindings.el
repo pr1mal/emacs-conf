@@ -45,3 +45,6 @@
 (define-key global-map (kbd "C-c C-c c") 'comment-or-uncomment-region)
 
 (define-key global-map (kbd "C-c w") 'my-copy-line-under-cursor)
+
+;; I want right Cmd to be Ctrl
+(setq mac-right-command-modifier 'control)

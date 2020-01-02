@@ -5,4 +5,4 @@
 (define-key global-map (kbd "C-c a") 'org-agenda)
 (setq org-log-done t)
 (setq org-agenda-files '())
-(add-to-list 'org-agenda-files "~/Documents/org-notes/")
+(add-to-list 'org-agenda-files "~/Dropbox/org/")
