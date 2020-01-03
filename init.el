@@ -13,10 +13,11 @@
   (package-refresh-contents))
 
 ;; Add in your own as you wish:
-(defvar my-packages '(starter-kit 
-                      starter-kit-ruby
-                      starter-kit-bindings
-                      magit
+;  starter-kit 
+;  starter-kit-ruby
+;  starter-kit-bindings
+                      
+(defvar my-packages '(magit
                       blank-mode
                       lua-mode
                       rspec-mode
@@ -41,3 +42,11 @@
 (setq custom-file "~/.emacs.d/custom-file.el")
 (if (file-exists-p custom-file) (load custom-file))
 (put 'ido-exit-minibuffer 'disabled nil)
+
+;; Now load all my configs
+(defun load-directory (dir)
+      (let ((load-it (lambda (f)
+		       (load-file (concat (file-name-as-directory dir) f)))
+		     ))
+	(mapc load-it (directory-files dir nil "\\.el$"))))
+(load-directory "~/.emacs.d/eof/")

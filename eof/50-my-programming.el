@@ -52,14 +52,6 @@
 (add-to-list 'auto-mode-alist '("^Gemfile$"  . ruby-mode))
 ;;;\-----------------
 
-;;;/-----------------
-;;; Erlang
-(if *is-a-mac*
-    (progn
-      (setq load-path (cons "/usr/local/Cellar/erlang/R14B04/lib/erlang/lib/tools-2.6.6.5/emacs" load-path))
-      (setq erlang-root-dir "/usr/local/Cellar/erlang/R14B04/lib/erlang")
-      (setq exec-path (cons "/usr/local/Cellar/erlang/R14B04/lib/erlang/bin" exec-path))
-      (require 'erlang-start)))
 
 ;; compilation buffer stuff
 (setq compilation-scrolloutput t)

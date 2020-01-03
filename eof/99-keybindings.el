@@ -48,3 +48,6 @@
 
 ;; I want right Cmd to be Ctrl
 (setq mac-right-command-modifier 'control)
+
+;; redefine set-mark-command binding to remove conflict with my hotkey to Things quick entry
+(define-key global-map (kbd "C-c <SPC>") 'set-mark-command)
