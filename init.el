@@ -37,7 +37,7 @@
 ;; things required everywhere else are initialized/defined here
 
 (cond ((and *is-a-mac* window-system)
-       (set-frame-font "Envy Code R-13"))) ;; mac emacs doesn't honor :default font settings
+       (set-frame-font "Envy Code R-15"))) ;; mac emacs doesn't honor :default font settings
 
 (setq custom-file "~/.emacs.d/custom-file.el")
 (if (file-exists-p custom-file) (load custom-file))
