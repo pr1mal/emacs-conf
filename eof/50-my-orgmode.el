@@ -6,3 +6,5 @@
 (setq org-log-done t)
 (setq org-agenda-files '())
 (add-to-list 'org-agenda-files "~/Dropbox/org/")
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "IN PROGRESS(p)" "|" "DONE(d)" "CANCELLED(c)")))
